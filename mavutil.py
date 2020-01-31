@@ -999,6 +999,29 @@ class mavserial(mavfile):
         except Exception:
             return False
         
+class mavws(mavfile):
+    '''a websocket mavlink socket'''
+    def __init__(self,
+                 websocket,
+                 source_system=255,
+                 source_component=0,
+                 use_native=default_native):
+        self.socket = websocket
+        mavfile.__init__(self, None, "ws://device", source_system=source_system, source_component=source_component, use_native=use_native)
+
+
+    def close(self):
+        self.socket.close()
+
+    def recv(self,n=None):
+        data = self.socket.receive()
+        if data is None:
+            self.close()
+        return data
+
+    def write(self, buf):
+        self.socket.send(buf)
+
 
 class mavudp(mavfile):
     '''a UDP mavlink socket'''

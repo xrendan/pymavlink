@@ -1,3 +1,12 @@
+"""
+Created on: ???
+Created by: ???
+Last Modified By: Brendan Samek
+
+File Contents: packaging specification
+"""
+
+
 from __future__ import absolute_import, print_function
 from setuptools.command.build_py import build_py
 # Work around mbcs bug in distutils.
